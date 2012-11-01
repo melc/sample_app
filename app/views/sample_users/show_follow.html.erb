@@ -1,0 +1,30 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <%= gravatar_for @sample_user %>
+      <h1><%= @sample_user.name %></h1>
+      <span><%= link_to "view my profile", @sample_user %></span>
+      <span><b>Microposts:</b> <%= @sample_user.microposts.count %></span>
+    </section>
+    <section>
+      <%= render 'shared/stats' %>
+      <% if @sample_users.any? %>
+        <div class="user_avatars">
+          <% @sample_users.each do |sample_user| %>
+            <%= link_to gravatar_for(sample_user, size: 30), sample_user %>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+  </aside>
+  <div class="span8">
+    <h3><%= @title %></h3>
+    <% if @sample_users.any? %>
+      <ul class="users">
+        <%= render @sample_users %>
+      </ul>
+      <%= will_paginate %>
+    <% end %>
+  </div>
+</div>
